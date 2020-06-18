@@ -1,3 +1,4 @@
+#!/bin/bash
 set -e
 
 pushd ../Peano
@@ -11,7 +12,8 @@ automake --add-missing
 
 export CPLUS_INCLUDE_PATH="/usr/include/vtk/:$CPLUS_INCLUDE_PATH"
 
-./configure --enable-exahype --with-multithreading=omp --with-vtk --with-vtk-version=8 --with-vtk-suffix=''
+export OMP_NUM_THREADS=1
+./configure --enable-exahype --with-multithreading=omp --with-vtk --with-vtk-version=8 --with-vtk-suffix='' CFLAGS="-fno-devirtualize" CXXFLAGS="-fno-devirtualize" LDFLAGS="-fno-devirtualize"
 make -j 8
 pushd python/examples/exahype2/euler/
 export PYTHONPATH=../../../
