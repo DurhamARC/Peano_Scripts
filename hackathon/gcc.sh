@@ -2,7 +2,13 @@
 set -e
 
 module load Bundle/gnu/10.1.0-gpu
+#module load Core/cuda/10.1.243
+#export CUDA_PATH=/mnt/shared/sw-hackathons/nvidia/hpcsdk/Linux_x86_64/cuda/10.1
+#export CUDA_LIB="${CUDA_PATH}/lib64"
 
+module load cuda/11.0.2
+export CUDA_PATH=/mnt/shared/sw-hackathons/nvidia/hpcsdk/Linux_x86_64/cuda/11.0
+export CUDA_LIB="${CUDA_PATH}/lib64"
 
 pushd ../../Peano
 
@@ -22,4 +28,5 @@ export OMP_NUM_THREADS=1
 make -j 8
 pushd python/examples/exahype2/euler/
 export PYTHONPATH=../../../
-python3 finitevolumes-with-ExaHyPE2.py
+python4 finitevolumes-with-ExaHyPE2-gpu.py
+nvprof ./peano4
