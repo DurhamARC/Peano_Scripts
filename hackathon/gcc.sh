@@ -30,3 +30,4 @@ pushd python/examples/exahype2/euler/
 export PYTHONPATH=../../../
 python3 finitevolumes-with-ExaHyPE2-gpu.py
 nvprof ./peano4
+nsys profile --trace=cuda,nvtx,openmp --output=my_report.qdrep ./peano4
