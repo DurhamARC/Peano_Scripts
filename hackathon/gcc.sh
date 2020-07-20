@@ -28,5 +28,5 @@ export OMP_NUM_THREADS=1
 make -j 8
 pushd python/examples/exahype2/euler/
 export PYTHONPATH=../../../
-python4 finitevolumes-with-ExaHyPE2-gpu.py
+python3 finitevolumes-with-ExaHyPE2-gpu.py
 nvprof ./peano4
