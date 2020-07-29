@@ -29,13 +29,16 @@ automake --add-missing
 export OMP_NUM_THREADS=1
 
 export CXX="clang++"
-export LDFLAGS="-L${CUDA_LIB} -lcudart -fopenmp"
+#export LDFLAGS="-L${CUDA_LIB} -lcudart -fopenmp"
+export LDFLAGS="-L${CUDA_LIB} -lcudart -fopenmp=libiomp5 -fopenmp-version=50 -fopenmp-targets=nvptx64-nvidia-cuda -fopenmp-cuda-mode -ffast-math -L/mnt/shared/sw-hackathons/cuda-sdk/cuda-10.1/lib64 -lnvToolsExt"
 #export CFLAGS="-v --cuda-gpu-arch=sm_70 --cuda-path=${CUDA_PATH} -fopenmp -fopenmp-targets=nvptx64-nvidia-cuda -fopenmp-cuda-mode -fopenmp-version=50"
 #export CFLAGS="-v --cuda-gpu-arch=sm_70 --cuda-path=${CUDA_PATH} -fopenmp -fopenmp-targets=nvptx64-nvidia-cuda -fopenmp-cuda-mode -fopenmp-version=50"
 #export CXXFLAGS="-v -std=c++14 --cuda-gpu-arch=sm_70 --cuda-path=${CUDA_PATH} -fopenmp -fopenmp-version=50"
-export CXXFLAGS="-v -std=c++14 --cuda-gpu-arch=sm_70 --cuda-path=${CUDA_PATH} -fopenmp=libiomp5 -fopenmp-version=50"
+#export CXXFLAGS="-v -std=c++14 --cuda-gpu-arch=sm_70 --cuda-path=${CUDA_PATH} -fopenmp=libiomp5 -fopenmp-version=50"
+#export CXXFLAGS="-v -std=c++14 --cuda-path=${CUDA_PATH} -fopenmp=libiomp5 -fopenmp-version=50 -fopenmp-targets=nvptx64-nvidia-cuda -fopenmp-cuda-mode -ffast-math"
+export CXXFLAGS="-v -std=gnu++14 --cuda-path=${CUDA_PATH} -fopenmp=libiomp5 -fopenmp-version=50 -fopenmp-targets=nvptx64-nvidia-cuda -fopenmp-cuda-mode -ffast-math"
 #./configure  --enable-exahype --with-multithreading=omp CFLAGS="$CFLAGS" CXXFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS"
-./configure  --enable-exahype --with-multithreading=omp CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" CXX="$CXX"
+./configure  --enable-exahype --with-nvidia --with-multithreading=omp CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" CXX="$CXX"
 
 make -j 8
 pushd python/examples/exahype2/euler/
